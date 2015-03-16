@@ -23,20 +23,17 @@ get '/anarams' do
 
   possible_word = []
   puts random = v.shuffle!
-  until (possible_word.length) == fact(v.length)
-    puts "instide until #{possible_word.length}"
-    puts possible_word
+  idx = 0
+  until idx == 1000
     if possible_word.include?(random.join(""))
-      puts "inside if"
     else
-      puts "inside else"
       possible_word << random.join("")
     end
     random = v.shuffle!
-
-    puts "random = #{random}"
+    idx += 1
   end
   puts possible_word
+  puts possible_word.length
   # puts params
   # puts "ok" if File.read("words").include?(v)
 
