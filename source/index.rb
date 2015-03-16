@@ -17,9 +17,8 @@ get '/anagrams' do
   word_anagrams.each do |word|
       valid_words << word if dictionary.include?(word)
   end
-
-  return "#{valid_words.join(',')}"
-
+  return "#{valid_words.join(',')}" unless valid_words.empty?
+  return 500
 end
 
 def factorial(num)
