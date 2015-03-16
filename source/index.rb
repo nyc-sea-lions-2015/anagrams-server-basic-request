@@ -20,10 +20,13 @@ get '/anagrams' do
     # "#{params[:word]}"
     input_word = params[:word].chars
     word_combos = input_word.permutation(input_word.length)
+    unique_words = []
+    word_combos.each { |word| unique_words << word.join('') }
+    puts unique_words.uniq
 
-   # word_combos.each { |word| puts word.join('') }
-    # @list = []
-    # File.open("todo.txt").each_line do |item|
-    #   @list << Task.parse_task(item)
-    # end
+    dictionary = []
+    File.open("words").each_line do |word|
+      dictionary << word
+    end
+    puts dictionary
 end
