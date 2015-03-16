@@ -24,12 +24,14 @@ get '/anarams' do
   puts possible_word.length
   correct_words = []
   # puts params
-file = File.open("words")
+
+  possible_word.each do |word|
+    puts word
+    file = File.open("words")
     file.each_line do |line|
-      possible_word.each do |word|
         p "line= #{line} word= #{word}"
-      if line.chomp == word
-        correct_words << word
+      if line.chomp.downcase == word.downcase
+        correct_words << word.downcase
       end
     end
   end
