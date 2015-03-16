@@ -33,8 +33,6 @@ get '/anagrams' do
       collection << word if dictionary.include?(word)
     end
 
-    collection.each do |word|
-      (collection.length > 1) ? (print "#{word},") : (print "#{word}")
-    end
+    collection.join(',')
 
 end
