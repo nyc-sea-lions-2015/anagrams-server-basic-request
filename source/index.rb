@@ -5,10 +5,11 @@ get '/' do
 end
 
 get '/anagrams' do
-  matched_words = possible_anagrams(params[:word]).delete_if do |anagram|
+  possible_words = possible_anagrams(params[:word])#.delete_if do |anagram|
     # puts "#{matches?(anagram.join(''))}: #{anagram.join('')}"
-    matches?(anagram.join("")) == false
-  end.map {|result| result.join("")}.join(", ")
+    # matches?(anagram.join("")) == false
+  # end.map {|result| result.join("")}.join(", ")
+  matched_words = matches(possible_words)
 
   if matched_words.length == 0
     return 500
@@ -23,13 +24,20 @@ error 500..510 do
 end
 
 def possible_anagrams(word)
-  word.chars.permutation.to_a.uniq
+  word.chars.permutation.to_a.uniq.map{|anagram| anagram.join("")}
 end
 
-def matches?(word_to_find)
+def matches(possible_words)
+  dictionary_array = []
   File.readlines('./words').each do |word|
-    # puts "Word: #{word.strip}, Word_to_find:#{word_to_find}"
-    return true if word.chomp == word_to_find
+    dictionary_array << word.chomp
   end
-  false
+  possible_words & dictionary_array
 end
+# def matches?(word_to_find)
+#   File.readlines('./words').each do |word|
+#     # puts "Word: #{word.strip}, Word_to_find:#{word_to_find}"
+#     return true if word.chomp == word_to_find
+#   end
+#   false
+# end
