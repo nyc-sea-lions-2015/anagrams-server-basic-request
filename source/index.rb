@@ -9,32 +9,38 @@ end
 
 
 get '/anarams' do
-  v = params[:word]
-  v=v.split("")
-
-  def fact(n)
-    if n == 0
-      1
-    else
-      n * fact(n-1)
-    end
-  end
-  puts fact(v.length)
-
+  v = params[:word].split("")
   possible_word = []
-  puts random = v.shuffle!
-  idx = 0
-  until idx == 1000
-    if possible_word.include?(random.join(""))
-    else
+  random = v.shuffle!
+
+  1000.times do
+    unless possible_word.include?(random.join(""))
       possible_word << random.join("")
     end
     random = v.shuffle!
-    idx += 1
   end
+
   puts possible_word
   puts possible_word.length
+  correct_words = []
   # puts params
-  # puts "ok" if File.read("words").include?(v)
-
+file = File.open("words")
+    file.each_line do |line|
+      possible_word.each do |word|
+        p "line= #{line} word= #{word}"
+      if line.chomp == word
+        correct_words << word
+      end
+    end
+  end
+  puts correct_words.join(",")
 end
+
+
+  # def fact(n)
+  #   if n == 0
+  #     1
+  #   else
+  #     n * fact(n-1)
+  #   end
+  # end
