@@ -14,7 +14,7 @@ get '/anagrams/' do
     final << line if dic_word == word
   end
   if final.empty?
-    return "No Anagrams Found for #{print_word}"
+    return [400,"No Anagrams Found for #{print_word}"]
   else
     final.each do |word|
       puts word
