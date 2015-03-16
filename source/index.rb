@@ -16,10 +16,12 @@ end
 # Store all matches in a collection and return the response to the user
 # in a comma separated string using cURL
 
-get '/anagrams/:word' do
+get '/anagrams' do
     # "#{params[:word]}"
     input_word = params[:word].chars
-    puts input_word
+    word_combos = input_word.permutation(input_word.length)
+
+   # word_combos.each { |word| puts word.join('') }
     # @list = []
     # File.open("todo.txt").each_line do |item|
     #   @list << Task.parse_task(item)
