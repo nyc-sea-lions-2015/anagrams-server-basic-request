@@ -9,7 +9,7 @@ end
 
 get '/anagrams' do
   l = params[:word].length
-  array_size = factorial(l)
+  @array_size = factorial(l)
   word_anagrams=anagrams(params[:word])
   dictionary = File.open("words").readlines
   dictionary.map! {|word| word.chomp}
@@ -18,7 +18,7 @@ get '/anagrams' do
       valid_words << word if dictionary.include?(word)
   end
   return "#{valid_words.join(',')}" unless valid_words.empty?
-  return 500
+  return [500, "No Anagrams Found for #{params[:word]}"]
 end
 
 def factorial(num)
@@ -30,7 +30,7 @@ end
 
 def anagrams(word)
     a = []
-    until a.size == array_size do
+    @array_size.times  do
       new_word = word.split('').shuffle.join('')
       unless a.include?(new_word)
         a << new_word
