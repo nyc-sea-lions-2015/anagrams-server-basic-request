@@ -6,19 +6,29 @@ get '/' do
 end
 
 get '/:anagram' do
-  anagrams = []
-  word = params[:anagram]
-  word = word.downcase.split('').sort.join
-  results = []
-  $dict_hash.each do |key, value|
-    if value == word
-      anagrams << key
+    anagrams = []
+    word = params[:anagram]
+    word = word.downcase.split('').sort.join
+    results = []
+  if $dict_hash.has_value?(word)
+    $dict_hash.each do |key, value|
+      if value == word
+        anagrams << key
+      end
     end
+    anagrams.each do |anagram|
+      results << "#{anagram} is an anagram of #{word} <br/>"
+    end
+    results.each do |result|
+      p result
+    end
+  else
+    redirect "/#{word}/error"
   end
-  anagrams.each do |anagram|
-    results << "#{anagram} is an anagram of #{word} <br/>"
-  end
-  results.each do |result|
-    p result
-  end
+end
+
+get '/:anagram/error' do
+  word = params[:anagram]
+  status 403
+  body "There are no anagrams for #{word}"
 end
