@@ -16,13 +16,8 @@ get '/anagrams/' do
   end
   p anagram_array
 
-
-
-
-  # p "hello".permutation(5).to_a
-  # permutations = anagram.split("").permutation(anagram.length).to_a
-  # # p permutations
-  # permutations.map {|arr| arr.join }
-  # p permutations
+  anagrams = []
+  anagram.chars.permutation(5) {|arr| anagrams << arr.join}
+  p anagrams.each {|word| p word.chomp}.join(", ")
 end
 
