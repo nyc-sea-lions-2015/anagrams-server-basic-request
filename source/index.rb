@@ -7,10 +7,9 @@ end
 # DONE
 # Take the word parameter from the client
 # We want to separate each letter from the parameter
-
+# We want to find all possible combinations of those letters
 
 # TODO
-# We want to find all possible combinations of those letters
 # and compare against the wordlist.
 
 # Store all matches in a collection and return the response to the user
@@ -22,11 +21,17 @@ get '/anagrams' do
     word_combos = input_word.permutation(input_word.length)
     unique_words = []
     word_combos.each { |word| unique_words << word.join('') }
-    puts unique_words.uniq
+    unique_words = unique_words.uniq
 
     dictionary = []
     File.open("words").each_line do |word|
-      dictionary << word
+      dictionary << word.chomp
     end
-    puts dictionary
+
+    unique_words.each do |word|
+      puts "#{word} is a #{word.class}"
+      puts dictionary.include?(word)
+      puts ""
+    end
+
 end
