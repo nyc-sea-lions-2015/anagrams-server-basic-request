@@ -106,9 +106,11 @@ Now use the curl command to test your application
 	$ curl localhost:4567?word=hello
 	$hello,helol,hello,helol,hlole,hlole,holel,holle,holel,holle,eholl,eholl,ellho,ellho,lhole,lehol,lleho,lohel,lhole,lehol,lleho,lohel,ohell,ohell,ollhe,ollh
 	
-### Release 3: Try it out in a browser
-Let
- 
+### Release 4: Add Error Handeling
+Finally reference the [Sinatra](http://www.sinatrarb.com/intro.html) docs in the Return Values section. Explore the possibility of returning an Internal Server Error Code, with a message. 
+
+Now if the user request uses a word that has no anagrams. Build a response with the  internal server error, and return a message that says "No Anagrams Found for #{word}"
+
 
 ## Conclusion
-Provide the students with some closure for the challenge.  Reinforce why students completed this challenge and provide a check on whether they have achieved the desired learning from the challenge.
+Based off what you've discovered you should be comfortable with how you can send a request to a server, parse some parameters, and build a response to the client. Great Job! 
