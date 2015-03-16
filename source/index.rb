@@ -8,9 +8,9 @@ end
 # Take the word parameter from the client
 # We want to separate each letter from the parameter
 # We want to find all possible combinations of those letters
+# and compare against the wordlist.
 
 # TODO
-# and compare against the wordlist.
 
 # Store all matches in a collection and return the response to the user
 # in a comma separated string using cURL
@@ -28,10 +28,13 @@ get '/anagrams' do
       dictionary << word.chomp
     end
 
+    collection = []
     unique_words.each do |word|
-      puts "#{word} is a #{word.class}"
-      puts dictionary.include?(word)
-      puts ""
+      collection << word if dictionary.include?(word)
+    end
+
+    collection.each do |word|
+      (collection.length > 1) ? (print "#{word},") : (print "#{word}")
     end
 
 end
