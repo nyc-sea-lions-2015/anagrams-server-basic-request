@@ -8,11 +8,11 @@ end
 get '/:anagram' do
     anagrams = []
     real_word = params[:anagram]
-    word = real_word.downcase.split('').sort.join
+    sorted_word = real_word.downcase.split('').sort.join
     results = []
-  if $dict_hash.has_value?(word)
+  if $dict_hash.has_value?(sorted_word)
     $dict_hash.each do |key, value|
-      if value == word
+      if value == sorted_word
         anagrams << key
       end
     end
