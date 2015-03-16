@@ -15,8 +15,6 @@ get '/anagrams/' do
   end
 
 
-
-
   anagrams = []
   anagram.chars.permutation {|arr| anagrams << arr.join}
   p anagrams.each {|word| p word.chomp}.uniq.join(", ")
