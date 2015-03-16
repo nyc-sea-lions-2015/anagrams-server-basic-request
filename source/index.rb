@@ -1,27 +1,41 @@
 #index.rb
 require 'sinatra'
+ "words"
 
 get '/' do
   'Anagrams Server'
 end
 
+
 get '/anagrams' do
   l = params[:word].length
-  def factorial(num)
+  array_size = factorial(l)
+  word_anagrams=anagrams(params[:word])
+  dictionary = File.open("words").readlines
+  dictionary.map! {|word| word.chomp}
+  valid_words = []
+  word_anagrams.each do |word|
+      valid_words << word if dictionary.include?(word)
+  end
+
+  return "#{valid_words.join(',')}"
+
+end
+
+def factorial(num)
     if (num == 0 || num == 1)
       return 1
     end
     return num * factorial(num-1)
-  end
+end
 
-  array_size = factorial(l)
-  def anagrams(word)
-    anagrams = []
-    until anagrams.size == array_size do
+def anagrams(word)
+    a = []
+    until a.size == array_size do
       new_word = word.split('').shuffle.join('')
-      unless anagrams.include?(new_word)
-        anagrams << new_word
+      unless a.include?(new_word)
+        a << new_word
       end
     end
+    a
   end
-end
