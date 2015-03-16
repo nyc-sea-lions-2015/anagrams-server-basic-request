@@ -9,10 +9,35 @@ end
 
 
 get '/anarams' do
-value = params[:word]
+  v = params[:word]
+  v=v.split("")
 
+  def fact(n)
+    if n == 0
+      1
+    else
+      n * fact(n-1)
+    end
+  end
+  puts fact(v.length)
 
-  puts params
-  puts "ok" if File.read("words").include?(value)
+  possible_word = []
+  puts random = v.shuffle!
+  until (possible_word.length) == fact(v.length)
+    puts "instide until #{possible_word.length}"
+    puts possible_word
+    if possible_word.include?(random.join(""))
+      puts "inside if"
+    else
+      puts "inside else"
+      possible_word << random.join("")
+    end
+    random = v.shuffle!
+
+    puts "random = #{random}"
+  end
+  puts possible_word
+  # puts params
+  # puts "ok" if File.read("words").include?(v)
 
 end
