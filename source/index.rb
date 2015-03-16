@@ -7,8 +7,8 @@ end
 
 get '/:anagram' do
     anagrams = []
-    real_word = params[:anagram]
-    sorted_word = real_word.downcase.split('').sort.join
+    user_word = params[:anagram]
+    sorted_word = user_word.downcase.split('').sort.join
     results = []
   if $dict_hash.has_value?(sorted_word)
     $dict_hash.each do |key, value|
@@ -17,13 +17,13 @@ get '/:anagram' do
       end
     end
     anagrams.each do |anagram|
-      results << "#{anagram} is an anagram of #{real_word} <br/>"
+      results << "#{anagram} is an anagram of #{user_word} <br/>"
     end
     results.each do |result|
       p result
     end
   else
-    redirect "/#{real_word}/error"
+    redirect "/#{user_word}/error"
   end
 end
 
