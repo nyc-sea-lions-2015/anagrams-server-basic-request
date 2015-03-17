@@ -97,7 +97,7 @@ dictionary, not whatever dictionary happens to be on the machine.
 
 
 ### Release 2: Create Route to find Anagrams
-Now create a new get route '/anarams' that will take a parameter called 'word', create a list of possible anagrams, and search the word file in your application directory for all matching words.
+Now create a new get route '/anagrams' that will take a parameter called 'word', create a list of possible anagrams, and search the word file in your application directory for all matching words.
 
 Store each of the matched anagrams in a collection and return them in the response from the server to the client in a comma separated string.
 
